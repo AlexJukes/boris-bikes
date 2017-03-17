@@ -22,7 +22,7 @@ end
   expect { subject.release_bike }.to raise_error("No bikes available.")
 end
   it 'raises Exception when user tries to dock a bike to a station that is full (capacity = 20)' do
-    20.times {subject.dock_bike(Bike.new)}
+    DockingStation::DEFAULT_CAPACITY.times {subject.dock_bike(Bike.new)}
     expect { subject.dock_bike(Bike.new) }.to raise_error("Docking station is full")
   end
 end

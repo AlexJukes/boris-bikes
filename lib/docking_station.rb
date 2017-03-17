@@ -1,6 +1,7 @@
 require './lib/bike.rb'
 
 class DockingStation
+    DEFAULT_CAPACITY = 20
   #We initialize the class and set the bikes variable to be an empty Array
     def initialize
       @bikes = []
@@ -19,7 +20,7 @@ class DockingStation
   private
 
   def full?
-    bikes.length >= 20
+    bikes.length >= DEFAULT_CAPACITY
   end
 
   def empty?
