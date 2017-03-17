@@ -16,16 +16,14 @@ end
  it 'station_LB.dock_bike(bike_56) to return an instance variable which stores bike_56' do
   bike_56 = Bike.new #Instead of magically creating a bike from DockingStation, we create a bike from the class.
   subject.dock_bike(bike_56)
-  expect(subject.bike_rack).to eq bike_56
+  expect(subject.bikes.pop).to eq bike_56
   end
-  it 'raise Exception when user tries to release bike and there are no bikes docked at that station' do
+  it 'raises an Exception when user tries to release bike and there are no bikes docked at that station' do
   expect { subject.release_bike }.to raise_error("No bikes available.")
 end
-  it 'raises Exception when user tries to dock a bike to a station that is full (capacity = 1)' do
-    bike_56 = Bike.new
-    bike_79 = Bike.new
-    subject.dock_bike(bike_56)
-    expect { subject.dock_bike(bike_79) }.to raise_error("Docking station is full")
+  it 'raises Exception when user tries to dock a bike to a station that is full (capacity = 20)' do
+    20.times {subject.dock_bike(Bike.new)}
+    expect { subject.dock_bike(Bike.new) }.to raise_error("Docking station is full")
   end
 end
 

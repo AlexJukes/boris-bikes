@@ -1,17 +1,16 @@
 class DockingStation
-  def release_bike
-    if @bike_rack.nil?
-    raise "No bikes available."  # Guard condition
-    else
-    Bike.new
-  end
-  end
-  def dock_bike(bike_56)
-    if @bike_rack.nil?
-      @bike_rack = bike_56
-    else
-      raise "Docking station is full"
+  #We initialize the class and set the bikes variable to be an empty Array
+    def initialize
+      @bikes = []
     end
+  def release_bike
+    raise "No bikes available." if @bikes.empty? # Guard condition
+    @bikes.pop
   end
-  attr_reader :bike_rack
+
+  def dock_bike(bike_56)
+      raise "Docking station is full" unless @bikes.length < 20
+      @bikes << bike_56
+  end
+  attr_reader :bikes
 end
