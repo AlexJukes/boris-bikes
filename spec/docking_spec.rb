@@ -35,6 +35,24 @@ end
     expect(subject.capacity).to eq DockingStation::DEFAULT_CAPACITY
   end
 
+  it 'expects to raise an exception when we try to release a broken bike' do
+    bike1 = Bike.new
+    bike1.report_broken
+    subject.dock_bike(bike1)
+    3.times {subject.dock_bike(Bike.new)}
+    bike2 = Bike.new
+    bike2.report_broken
+    subject.dock_bike(bike2)
+    expect(subject.release_bike).to be_a(Bike)
+  end
+
+  it 'expects to raise an exception when we try to release a broken bike' do
+    bike = Bike.new
+    bike.report_broken
+    subject.dock_bike(bike)
+    expect {subject.release_bike}.to raise_error 'No working bikes'
+  end
+
 end
 
 #subject is always BRAND NEW.

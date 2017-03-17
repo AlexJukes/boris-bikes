@@ -9,7 +9,9 @@ class DockingStation
     end
   def release_bike
     raise "No bikes available." if empty? # Guard condition
-    bikes.pop
+    # iterate over array and return the first working bike found
+    bikes.each_index { |index| return bikes.slice!(index) unless bikes[index].broken }
+    raise "No working bikes"
   end
 
   def dock_bike(bike_56)
