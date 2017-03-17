@@ -25,6 +25,16 @@ end
     DockingStation::DEFAULT_CAPACITY.times {subject.dock_bike(Bike.new)}
     expect { subject.dock_bike(Bike.new) }.to raise_error("Docking station is full")
   end
+
+  it 'sets the capacity to the argument given when initializing the class' do
+    d = DockingStation.new(30)
+    expect(d.capacity).to eq 30
+  end
+
+  it 'has a default capacity of 20' do
+    expect(subject.capacity).to eq DockingStation::DEFAULT_CAPACITY
+  end
+
 end
 
 #subject is always BRAND NEW.
